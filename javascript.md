@@ -235,3 +235,152 @@ var x = myFunction(5, 6);
 
 - Confirm Box
   > A confirm box is often used to have the user verify or accept something. When a confirm box pops up, the user must click either OK or Cancel to proceed. If the user clicks OK, the box returns true. If the user clicks Cancel, the box returns false.
+
+20. Object Properties
+    > You can access object properties in two ways.
+
+```js
+objectName.propertyName;
+// or
+objectName["propertyName"];
+```
+
+```js
+var person = {
+  name: "John",
+  age: 31,
+  favColor: "green",
+  height: 183,
+};
+
+var x = person.age;
+var y = person["age"];
+
+console.log(x);
+console.log(y);
+
+// 31
+// 31
+```
+
+> > Objects are one of the core concepts in JavaScript.
+
+21. The Object Constructor.
+    > In the preivious lesson, we created an object using the object literal(or initializer) syntax.
+
+```js
+var person = {
+  name: "John",
+  age: 42,
+  favColor: "green",
+};
+```
+
+> This allows you to create only a single object. Sometimes, we need to set an "object type" that can be used to create a number of objects of a single type. The standard way to create an "object type" is to use an object constructor function.
+
+```js
+function person(name, age, color) {
+  this.name = name;
+  this.age = age;
+  this.favColor = color;
+}
+```
+
+> The above function (person) is an object constructor, which.takes parameters and assigns them to the object properties.
+
+> > The this keyword refers to the current object. Note that this is not a variable. It is a keyword, and its value cannot be changed.
+
+22. Creating Objects
+    > Once you have an object constructor, you can use the new keyword to create new objects of the same type.
+
+```js
+var p1 = new person("John", 41, "green");
+var p2 = new person("Amy", 21, "red");
+
+console.log(p1.age); // outputs 41
+console.log(p2.name); // outputs "Amy"
+```
+
+> > p1 and p2 are now objects of the person type. Their properties are assigned to the corresponding values.
+
+23. Object Initialization
+    > Use the object literal or initializer syntax t ocreate single objects.
+
+```js
+var John = { name: "John", age: 25 };
+var James = { name: "james", age: 21 };
+```
+
+> > Objects consist of properties, which are used to describe an object. Values of object properties can either contain primitive data types or other objects.
+
+24. Methods
+    > Methods are functions that are stored as object properties. Use the following syntax to create an object method:
+
+```js
+methodName = function () {
+  codeline;
+};
+```
+
+> Access an object method using the following syntax:
+
+```js
+objectName.methodName();
+```
+
+> A method is a function, belonging to an object. It can be referenced using the this keyword. The this keyword is used as a reference to the current object, meaning that you can access the objects properties and methods using it. Defining methods is done inside the constructor function.
+
+```js
+function person (name, age) {
+  this.name = name;
+  this.age = age;
+  this.changeName = fuinction (name) {
+    this.name = name;
+  }
+}
+
+var p = new person("David", 21);
+p.changeName("John");
+// Now p.name equals to "John"
+```
+
+> In the example above, we have defined a method named changeName for our person, which is a function, that takes a parameter name and assign it to the name property of the object. this.name refer to the name property of the object.
+
+> > The changeName method changes the object's name property to its argument.
+
+25. Methods
+    > You can also define the function outside of the constructor function and associate it with the object.
+
+```js
+function person(naem, age) {
+  this.name = name;
+  this.age = age;
+  this.yearOfBirth = bornYear;
+}
+
+function bornYear() {
+  return 2016 - this.age;
+}
+```
+
+> > As you can see, we have assigned the object's yearOfBirth property to the bornYear function. The this keyword is used to access the age property of the object, which is going to call the method.
+
+> > Note that it's not necessary to write the function's parentheses when assigning it to an object.
+
+```js
+function person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.yearOfBirth = bornYear;
+}
+function bornYear() {
+  return 2016 - this.age;
+}
+
+var p = new person("A", 22);
+console.log(p.yearOfBirth());
+
+// 1994
+```
+
+> > Call the method by the property name you specified in the constructor function, rather than the function name.
