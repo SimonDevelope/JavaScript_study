@@ -384,3 +384,160 @@ console.log(p.yearOfBirth());
 ```
 
 > > Call the method by the property name you specified in the constructor function, rather than the function name.
+
+26. JavaSCript Arrays
+
+    > Array store multiple values in a single variable. To store
+    >
+    > > Array and new keywords create an array
+
+27. Accessing an Array
+    > You refer to an array element by referring to the index number written in square brackets. This statement accesses the value of the first element in courses and changes the value of the second element.
+
+```js
+var courses = new Array("HTML", "CSS", "JS");
+var course = courses[0]; // HTML
+courses[1] = "C++"; // Changes the second element.
+```
+
+> > [0]is the first element in an array. [1] is the second. Array indexes start with 0
+
+> Attempting to access an index outside of the array, returns the value undefined
+
+```js
+var course = new Array("HTML", "CSS", "JS");
+console.log(course[10]);
+
+// undefined
+```
+
+> > Our couse array has just 3 element, so the 10th index, which is the 11th element, does not exist(is undefined).
+
+28. Creating Arrays
+    > You can also declare an array, tell it the number of elements it will store, and add the elements later.
+
+```js
+var courses = new Array(3);
+courses[0] = "HTML";
+courses[1] = "CSS";
+courses[2] = "JS";
+```
+
+> > An array is a special type of object. An array uses numbers to access its elements, and an object uses names to access its members.
+
+> JavaScript arrays are dynamic, so you can declare an array and not pass any arguments with the Array() constructor. You can then add the elements dynamically.
+
+> > You can add as many elements as you need to.
+
+29. Array Literal
+    > For greater simplicity, readability, and execution speed, you can also declare arrays using the array literal syntax.
+
+```js
+var courses = ["HTML", "CSS", "JS"];
+```
+
+> This result in the same array as the one created with the new Array() syntax.
+
+> > You can access and modify the elements of the array using the index number, as you did before. The array literal syntax is the recommended way to declare arrays.
+
+29. The Length Property
+    > JavaScript arrays have useful built-in properties and methods. An array's length property returns the number of it's elements.
+
+> > The length property is always one more than the highest array index. If the array is empty, the length property returns 0.
+
+30. Combining Arrays
+    > JavaScript's concat() method allows you to join arrays and create an entirely new array.
+
+```js
+var c1 = ["HTML", "CSS"];
+var c2 = ["JS", "C++"];
+var courses = c1.concat(c2);
+console.log(courses);
+
+// [ 'HTML', 'CSS', 'JS', 'C++' ]
+```
+
+> The courses array that results contains 4 elements(HTML, CSS, JS, C++)
+>
+> > The concat operation does not affect the c1 and c2 arrays -it returns the resulting concatenation as a new array.
+
+31. Associative Arrays
+    > While many programming languages support arrays with named indexes (text instead of numbers), called associative arrays JavaScript does not. However, you still can use the named array syntax, which will produce an object.
+
+```js
+var person = []; // empty array
+person["name"] = "John";
+person["age"] = 46;
+console.log(person["age"]);
+
+// 46
+```
+
+> Now, person is treated as an object, instead of being an array. The named indexes "name" and "age" become properties of the person object.
+
+> > As the person array is treated as an object, the standard array methods and properties will produce incorrect results. For example, person.length will return 0.
+
+> Remember that JavaScript does not support arrays with named indexes. In JavaScript, arrays always use numbered indexes. It is better to use an object when you want the index to be a string(text). Use an array when you want the index to be a number.
+>
+> > If you use a named index, JavaScript will redefined the array to a standard object.
+
+32. The Math Object
+    > The Math oject allows you to perform mathematical tasks, and includes several properties.
+
+| Property | Description                            |
+| -------- | -------------------------------------- |
+| E        | Euler's constant                       |
+| LN2      | Natural log of the value 2             |
+| LN10     | Natural log of the value 10            |
+| LOG2E    | The base 2 log of Euler's constant (E) |
+| LOG10E   | The base 10 log of Euler's constant(E) |
+| PI       | Returns the constant PI                |
+
+```js
+console.log(Math.PI);
+
+// 3.141592653589793
+```
+
+> > Nath has no constructor. There's no need to create a Math object first.
+
+33. Math Object Methods
+    > The Math object contains a number of methods that are used for calculations:
+
+| Method           | Description                                                                   |
+| ---------------- | ----------------------------------------------------------------------------- |
+| abs(x)           | REturn the absolute value of x                                                |
+| acos(x)          | Return the arccosine of x, in radians                                         |
+| asin(x)          | Returns the arccosine of x, in radians                                        |
+| atan(x)          | Returns the arctangent of x as a numeric value between -PO/2 and PI/2 radians |
+| atan2(y,x)       | Returns the arcangent of the quotient of its argumennts                       |
+| ceil(x)          | Returns x, rounded upwards to the nearest integer                             |
+| cos(x)           | Returns the cosine of x(x is in radians)                                      |
+| exp(x)           | Returns the value of E^x                                                      |
+| floor(x)         | Retruns x, rounded downwards to the nearest integer                           |
+| log(x)           | Returns the natural logarithm (base E) of x                                   |
+| max(x,y,x,...,n) | Returns the number with the heightest values                                  |
+| min(x,y,z,...,n) | Returns the number with the lowest value                                      |
+| pow(x,y)         | Returns the value of x to the power of y                                      |
+| random()         | Returns a random number between 0 and 1                                       |
+| round(x)         | Rounds x to the nearest integer                                               |
+| sin(x)           | Returns the sine of x (x is in radians)                                       |
+| sqrt(x)          | Returns the square root of x                                                  |
+| tan(x)           | Returns the tangent of an angle                                               |
+
+> > Toi get a random number between 1-10, use Math.random(), which gives you a number between 0-1. Then multiply the number by 10, and then take Math.ceil() from it: Math.ceil(Math.random() \* 10).
+> > Math is a handy object. You can save a lot of time using Math, instead of writing your own functions every time.
+
+34. Date Methods
+    > when a Date object is created, a number of methods make it possible to perform perations on it.
+
+| Method            | Description               |
+| ----------------- | ------------------------- |
+| getFullYear()     | get the years             |
+| getMonth()        | gets the month            |
+| getDate()         | gets the day of the month |
+| getDay()          | gets the day of the week  |
+| getHours()        | gets the hour             |
+| getMinutes()      | gets the minutes          |
+| getSeconds()      | get the seconds           |
+| getMilliseconds() | get the milliseconds      |
