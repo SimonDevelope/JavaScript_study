@@ -548,3 +548,394 @@ console.log(Math.PI);
 [The DOM](./The_DOM.png)
 
 > > JavaScript ca be used to manipulate the DOM of a page dynamically to add, delete and modify elements.
+
+36. DOM Tree
+    > The DOM represents a document as a tree structure. HTML elements become interrelated nodes in the tree. All those nodes in the tree have some kind of relations among each other. nodes can have child nodes. Nodes on the same tree level are called siblings. For example, consider the following structure.
+
+<img href="./The_DOM.png">
+
+> For the example above:
+
+- html tag has two children (head tag, body tag);
+- head tag has one child (title tag) and one parent (html tag);
+- title tag has one parent (head tag) and no children;
+- body tag has two children (h1 tag and a tag) and one parent (html tag);
+
+> > It is important to understand the relationships between elements in an HTML document in order to manipulate them with JavaScript.
+
+37. The document Object
+    > There is a predefined document object in JavaScript, which can be used to access all elements on the DOM. In other words, the document object is the owner(or root) of all objects in your webpage. So, if you want to access objects in an HTML page, you always start with accessing the document object.
+
+```js
+document.body.innerHTML = "some text";
+```
+
+> As body is an element of the DOM, we can access it using the documents object and change the content of the innerHTML property.
+
+> > The innerHTML property can be used on almost all HTML elements to change its content.
+
+38. Selecting Elements
+    > All HTML elements are objects. And as we know every object has properties and Methods. The document object has methods that allow you to select the desired HTML element. These three methods are the most commonly used for selecting HTML elements:
+
+```js
+// finds element by id
+document.getElemenById(id);
+
+//finds elements by class name
+document.getElementsByClassName(name);
+
+// finds elements by tag name
+document.getElementsByTagName(name);
+```
+
+> Im the example below, the getElementById method is used to select the element with id="demo" and change its content:
+
+```js
+var elem = document.getElementById("demo");
+elem.innerHTML = "Hello World!";
+```
+
+> > The example above assumes that the HTML contains an element with id="demo", for example '<div id="demo"></div>'
+
+38. Selecting Elements
+    > The getElementsByClassName() method returns a collection of all elements in the document with the specified class name. For example, if our HTML page contained three elements with class="demo", the following code would return all those elements as an array:
+
+```js
+var arr = document.getElementsByClassName("demo");
+// accessing the second element
+arr[1].innerHTML = "Hi";
+```
+
+> Similarly, the getElementsByTagName method returns all of the elements of the specified tag name as an array. The following example gets all paragraph elements of the page and changes their contetn:
+
+```js
+<p>hi</p>
+<p>hello</p>
+<p>hi</p>
+<script>
+var arr = document.getElementsByTagName("p");
+for (var x = 0; x < arr.length; x++) {
+  arr[x].innerHTML = "Hi there";
+}
+</script>
+```
+
+> The script will result in the following HTML:
+
+```js
+<p>Hi there</p>
+<p>Hi there</p>
+<p>Hi there</p>
+```
+
+> > we used the length property of the array to loop through all the selected elements in the above example.
+
+39. Working with DOM
+    > Each element in the DOM has a set of properties and methods that provide information about their relationships in the DOM:
+
+- element.childNodes returns an array of an array of an element's child nodes.
+- element.firstChild returns the first child node of an element.
+- element.lastChild returns the last child node of an element.
+- element.hasChildNodes returns true if an element has any child nodes, otherwise false.
+- element.nextSibling retruns the next node at the same tree level.
+- element.previousSibling returns the previous node at the same tree level.
+- element.parentNode returns the parent node of an element.
+
+> We can, for example, select all child nodes of an element and change their content:
+
+```js
+<html>
+  <body>
+    <div id = "demo">
+      <p>some text</p>
+      <p>some other text</p>
+    </div>
+
+    <script>
+    var a = document.getElementById("demo");
+    var arr = a.childNodes;
+    for (var x = 0; x<arr.length; x++) {
+      arr[x].innerHTML = "new text";
+    }
+    </script>
+  </body>
+</html>
+```
+
+> > The code above changes the text of both paragraphs to "new text".
+
+40. Changing Attributes
+    > Once you have selected the element(s) you want to work with, you can change their attributes. As we have seen in the previous lessons, we can change the text content of an element using the innerHTML property. Similarly, we can change the attributes of elements. For exampe, we can change the src attribute of an image:
+
+```js
+<img id="myimg" src="orange.png" alt="" />
+<script>
+var el = document.getElementById("myimg");
+el.src = "apple.png"
+</script>
+```
+
+> We can change the href attribute of a link:
+
+```js
+<a href="http://www.example.com"> Some link</a>
+<script>
+var el = document.getElementByTagName("a");
+el[0].href = "http://www.sololearn.com";
+</script>
+```
+
+> > Practically all attributes of an element can be changed using JavaScript.
+
+41. Changing Style
+    > The style of HTML elements can also be changed using JavaScript. All style attributes can be accessed using the style object of the element.
+
+```js
+<div id="demo" style="width:200px">some text</div>
+<script>
+var x = document.getElementById("demo");
+x.style.color="6600FF";
+x.style.width="100px";
+</script>
+```
+
+> The code above changes the text color and width of the div element.
+
+> > All CSS properties can be set and modified using JavaScript. Just remember, that you cannot use dashes (-) in the property names: these are replaced with camelCase versions, where the compound words begin with a capital letter. For example: the background-color property should be referred to as backgroundColor.
+
+42. Creating Elements
+    > Use the following methods to create new nodes: element.cloneNode() clones an element and returns the resulting node. document.createElement(element) creates a new element node. document.createTextNode(text) create a new text node.
+
+```js
+var node = document.createTextNode("Some new text");
+```
+
+> This will create a new text node, but it will not appear in the document until you append it to an existing element with one of the following methods: element.appendchild(newNode) add a new child node to an element as the last child node. element.insertBefore(node1, node2) inserts node1 as a child before node2.
+
+```js
+<div id ="demo">some content</div>
+
+<script>
+//creating a new paragraph
+var p = document.createElement("p");
+var node = docuemnt.createTextNode("Some new text");
+//adding the paragraph to the div
+div.appenChild(p);
+</script>
+```
+
+> > This creates a new paragraph and adds it to the existing div element on the page.
+
+43. Removing Elements
+    > To remove an HTML element, you must select the parent of the element and use the removeChild(node) method.
+
+```js
+<div id="demo">
+  <p id="p1">This is a paragraph</p>
+  <p id="p2">This is another paragraph</p>
+</div>
+
+<script>
+var parent = docuemnt.getElementById("demo");
+var child = docuemnt.getElementById("p1");
+parent.removeChild(child);
+</script>
+```
+
+> This removes the paragraph with id="p1" from the page.
+
+> > An alternative way of achieving the same result would be the use of the parentNode property to get the parent of the element we want to remove: var child = document.getElementById("p1"); child.parentNode.removeChild(child);
+
+44. Replacing Elements
+    > To replace an HTML element, the element.replaceChild(newNodes, oldNode) method is used.
+
+```js
+<div>
+  <p id="p1">This is a paragraph.</p>
+  <p id="p2">This is another paragraph</p>
+</div>
+
+<script>
+var p = document.createElement("p");
+var node = document.createTextNode("This is new");
+p.appenChild(node);
+
+var parent = document.getElementById("demo");
+var child = document.getElementById("p1");
+parent.replaceChild(p, child);
+</script>
+```
+
+> > The code above creates a new paragraph element that replaces the existing p1 paragraph.
+
+45. Handling Events
+    > You can write JavaScript code that executes when an event occurs, such as when a user clicks an HTML element,. moves the mouse, or submits a form. when an event occurs on a target element, a handler function is executed. Common HTML events include:
+
+| Event       | Description                                                                                  |
+| ----------- | -------------------------------------------------------------------------------------------- |
+| onclick     | occurs when the user clicks on an element                                                    |
+| onload      | occurs when an object has loaded                                                             |
+| onunload    | occurs once a page has unloaded                                                              |
+| onchange    | occurs when the contetn of a form element, the selec-tion, or the checked state have changed |
+| onmouseover | occurs when the pointer is moved onto an element, or onto one of its children                |
+| onmouseout  | occurs when a user moves the mouse pointer out of an element, or out of one of its children  |
+| onmousedown | occurs when the user presses a mouse button over an element                                  |
+| onmouseup   | occurs when a user release a mouse button over an element                                    |
+| onblur      | occurs when an element loses focus                                                           |
+| onfocus     | occurs when an element gets focus                                                            |
+
+> > Corresponding events can be added to HTML elements as attributes.
+
+46. Handling Events
+    > Let's display an alert popup when the user clicks a specified button:
+
+```js
+<button onclick="show()">Click Me</button>
+<script>
+function show() {
+  alert("Hi there")
+}
+</script>
+```
+
+> Event handlers can be assigned to elements.
+
+```js
+var x = docuemnt.getElementById("demo");
+x.onclick = function () {
+  document.body.innerHTML = Date();
+};
+```
+
+> > You can attach events to almost all HTML elements.
+
+47. Event
+    > The onload and onunload events are triggered when the user enters or leaves the page. These can be useful when performing actions after the page is loaded.
+
+```js
+<body onload="doSomething()">
+```
+
+> Similarly, the window.onload event can be used to run code after the whole page is loaded.
+
+```js
+window.onload = function () {
+  // some code
+};
+```
+
+> The onchange event is mostly used on textboxes. The event handler gets called when the text inside the textbox changes and focus is lost from the element.
+
+```js
+<input type="text" id ="name" onchange="change()">
+<script>
+function change() {
+  var x = document.getElementById("name");
+  x.value = x.value.toUpperCase();
+}
+</script>
+```
+
+> > It's important to understand events, because they are an essential part of dynamic web pages.
+
+48. Event Listener
+    > The addEventListener() method attaches an event handler to an element without overwriting existing event handlers. You can add many event handlers to one element. You can also add many event handlers of the same type to one element, i.e., two "click" events.
+
+```js
+element.addEventListener(event, function, useCapture);
+```
+
+> The first parameter is the event's type (like "click" or "mousedown"). The second parameter is the function we want to call when the event occurs. The third parameter is a Boolean value specifying whether to use event bubbling or event capturing. This parameter is optional, and will be described in the next lesson.
+
+> > Note that you don't use the "on" prefix for this event; use "click" instead of "onclick".
+
+```js
+element.addEventListener("click", myFunction);
+element.addEventListener("mouseover", myFunction);
+
+function myFunction() {
+  alert("Hellow World!");
+}
+```
+
+> This adds two event listeners to the element. We can remove on of the listeners:
+
+```js
+element.removeEventListener("mouseover", myFunction);
+```
+
+> Let's create an event handler that removes itself after being executed:
+
+```js
+<button id="demo">Start</button>
+
+<script>
+var btn = document.getElementById("demo");
+btn.addEventListener("click", myFunction);
+
+function myFunction() {
+  alert(Math.random());
+  btn.removeEventListener("click", myFunction)
+}
+</script>
+```
+
+> After clicking the button, an alert with a random number displays and the event listener is removed.
+
+> > Internet Explorer version 8 and lower do not support the addEventListener() and removeEventListener() methods. However, you can use the document.attachEvent() method to attach event handlers in Internet Explorer.
+
+49. Event Propagation
+    > There are two ways of event propagation in the HTML DOM: bubbling and capturing. Event propagation allows for the definition of the element order when an even occurs. If you have p tag element inside a div tag element, and the user clicks on the p tag element, which element's "click" event should be handled first?
+
+> In bubbling, the innermost element;s event is handled first and then the outer element;s event is handled. The p tag element;s click event is handled first, followed by the div tag element's click event.
+
+> In capturing, the outermost element's event is handled first and then the inner. The div tag element;s click event is handeld first, followed by the p tag element;s click event.
+
+> > Capturing goes down the DOM. Bubbling goes up the DOM
+
+50. Capturing vs Bubbling
+    > The addEventListener() method allows you to specify the propagation type with the "useCapture" parameter.
+
+```js
+addEventListener(event, function, useCapture)
+```
+
+> The default value is false, which means the bubbling propagation is used; when the value is set to true, the event uses the capturing propagation.
+
+```js
+// Capturing propagation
+elem1.addEventListener("click", myFunction, true);
+
+// Bubbling propagation
+elem2.addEventListener("click", myFunction, false);
+```
+
+> > This is particularly useful when you have the same event handled for multiple elements in the DOM hierarchy.
+
+51. Image Slider
+    > Now we can create a sample image slider project. the images will be changed using "Next" and "Prev" buttons. Now, let's create our HTML, which includes an image and the two navigation buttons:
+
+```js
+<div>
+  <button> Prev </button>
+  <img
+    id="slider"
+    src="http://www.example.com/uploads/slider/1.jpg"
+    width="200px"
+    height="100px"
+  />
+  <button> Next </button>
+</div>
+```
+
+> Next, let's defined our sample images in an array:
+
+```js
+var images = [
+  "http://www.example.com/uplaeds/slider/1.jpg"
+  "http://www.example.com/uplaeds/slider/2.jpg"
+  "http://www.example.com/uplaeds/slider/3.jpg"
+]
+```
+
+> > We are going to use three sample images that we have uploadsed to our server. You can use any number of images.
