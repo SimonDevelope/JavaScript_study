@@ -939,3 +939,203 @@ var images = [
 ```
 
 > > We are going to use three sample images that we have uploadsed to our server. You can use any number of images.
+
+52. ECMAScript 6
+    > ECMAScript (ES) is a scripting language specifiacation created to standardize JavaScript. The Sixth Edition, initially known as ECMAScript 6(ES) and later renamed to ECMAScript 2015, adds siginificant new syntax for writing complex applications, including classes and modules, iterators and for/of loops, generators, arrow functinos, binary data, typed arrays, collections(maps, sets, and weak maps), promises, number and math enhancements, reflection, and proxies. In other words, ES6 is a superset of JavaScript(ES5). The reason that ES6 became so popular is that it introduced new concventions and OOP concepts such as classes.
+
+> > In this module, we covert the most important additions to ES6.
+
+53. var & let
+    > In ES6 we have three ways of declaring variables:
+
+```js
+var a = 10;
+const b = "hello";
+let c = true;
+```
+
+> The type of declaration used depends on the necessary scope. Scope is the fundamental concept in all programming languages that defines the visibility of a variable.
+
+- var & let
+  > Unlike the var keyword, which defineds a variable globally, or locally to an entire function regardless of block scope, let allows you to declare variables that are limited in scope to the block, statement, or expression in which they are used.
+
+```js
+if (true) {
+  let name = Jack';
+}
+alert(name); // generates an error
+```
+
+> In this case, the name variable is accessible only in the scope of the if statement because it was declared as let. To demonstrate the difference in scope between var and let, consider this
+
+```js
+function varTest() {
+  var x = 1;
+  if (true) {
+    var x = 2; // same variable
+    console.log(x); // 2
+  }
+  console.log(x); // 2
+}
+
+function letTest() {
+  let x = 1;
+  if (true) {
+    let x = 2; // different variable
+    console.log(x); // 2
+  }
+  console.log(x); // 1
+}
+```
+
+> > let is not subject to Variable Hoisting, which means that let declarations do not move to the top of the current execution context.
+
+54. const
+    > const variables have the same scope as variables declared usin let, The difference is that const variables are immutable - they are not allowed to be ressigned.
+
+```js
+const a = "Hello";
+a = "Bye";
+```
+
+> > const is not subject to Variable Hoisting too, which means that const declarations do not move to the top of the current execution context. Also note that ES6 code will run onlt in browsers that support it. Older devices and browsers that do not support ES6 will return a syntax error.
+
+55. Template Literals in ES6
+    > Template literals are a way to output vriables in the string. Prior to ES6 we had to break the string
+
+```js
+let name = "David";
+let msg = "Welcome" + name + "!";
+console.log(msg);
+```
+
+> ES6 introduces a new way of outputting variable value in strings. The same code above can be rewritten as:
+
+```js
+let name = "David";
+let msg = `Welcome ${name}!`;
+console.log(msg);
+```
+
+> Notice, that template literals are enclosed by the backtick(``)character instead of double or single quotes. The ${expression} is a placeholder, and can include any expression, which will get evaluated and inserted into the template literal.
+
+```js
+let a = 8;
+let b = 34;
+let msg = `The sum is ${a + b}`;
+console.log(msg);
+```
+
+> > To escape a backtick in a template literal, put a backslash \ before the backtick.
+
+56. Loops in ECMAScript 6
+    > In JavaScript we commonly use the for loop to iterate over values in a list:
+
+```js
+let arr = [1, 2, 3];
+for (let k = 0; k < arr.length; k++) {
+  console.log(arr[k]);
+}
+```
+
+> The for...in loop is intended for iterating over the enumerable keys of an object.
+
+```js
+let obj = { a: 1, b: 2, c: 3 };
+for (let v in obj) {
+  console.log(v);
+}
+```
+
+> > The for...in loop should NOT be used to iterate over arrays because, depending on the JavaScript engine, it could iterate in an arbitrary order. Also, the iterating variable is a string, not a number, so if you try to do any math with the variable, you'll be performing string concatenation instead of addition.
+
+> ES6 introduces the new for...of loop, which creates a loop iterating over iterable objects.
+
+```js
+let list = ["x", "y", "z"];
+for (let val of list) {
+  console.log(val);
+}
+```
+
+> During each iteration the val variable is assigned the corresponding element in the list. The for...of loop works for other iterable objects as well, including strings.
+
+```js
+for (let ch of "Hello") {
+  console.log(ch);
+}
+```
+
+> > The for...of loop also works on the newly introduced collections (Map, Set, weakMap, and weakSet). We will learn about them in the upcoming lessons. Note that ES6 code will run only in browsers that support it. Older devices and browsers that do not support ES6 will return a syntax error.
+
+57. Function in ECMAScript 6
+    > Prior to ES6, a JavaScript function was defined like this:
+
+```js
+function add(x, y) {
+  var sum = x + y;
+  console.log(sum);
+}
+```
+
+> ES6 introduces a new syntax for writing functions, The same function from above can be written as:
+
+```js
+const add = (x, y) => {
+  let sume = x + y;
+  console.log(sum);
+};
+```
+
+> This new syntax is quite handy when you just need a simple function with one argument. You can skip typing function and return, as well as some parentheses and braces.
+
+```js
+const greet = (x) => "Welcom" + x;
+```
+
+> The code above defines a function named greet that has one argument and return a message. If there are no parameters, an empty pair of parentheses should be used, as in
+
+```js
+const x = () => {alret("Hi")}'
+```
+
+> The syntax is very useful for inline functions, For example, let's say we have an array, and for each element of the array we need to execute a function. We use the forEach method of the array to call a function for each element.
+
+```js
+var arr = [2, 3, 7, 8];
+
+arr.forEach(function (el) {
+  console.log(el * 2);
+});
+```
+
+> However, in ES6, the code above can be rewritten as following:
+
+```js
+const arr = [2, 3, 7, 8];
+
+arr.forEach((v) => {
+  console.log(v * 2);
+});
+```
+
+58. Default Parameters in ES6
+    > In ES6, we can put the default values right in the signature of the functions.
+
+```js
+function test(a, b = 3, c = 42) {
+  return a + b + c;
+}
+console.log(test(5)); // 50
+```
+
+> And here's an example of an arrow function with default parameters:
+
+```js
+const test = (a, b = 3, c = 42) => {
+  return a + b + c;
+};
+console.log(test(5)); // 50
+```
+
+> > Default value expressions are evaluated at function call time from left to right. This also means that default expressions can use the values of previously-filled parameters.
